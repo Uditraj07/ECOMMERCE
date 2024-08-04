@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js CDN -->
+    <style>
+        /* Custom styles for the sidebar */
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+        }
+
+        .content-section {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col md:flex-row">
+    <!-- Sidebar -->
+    <div class="sidebar bg-gray-800 text-white md:fixed md:w-64">
+        <div class="p-4 text-2xl font-semibold border-b border-gray-700">
+            Admin Panel
+        </div>
+        <nav class="mt-4">
+            <a href="#" id="dashboardLink" class="block py-2.5 px-4 hover:bg-gray-700">Dashboard</a>
+            <a href="#" id="ordersLink" class="block py-2.5 px-4 hover:bg-gray-700">Orders</a>
+            <a href="#" id="productsLink" class="block py-2.5 px-4 hover:bg-gray-700">Products</a>
+            <a href="#" id="customersLink" class="block py-2.5 px-4 hover:bg-gray-700">Customers</a>
+            <a href="#" id="reportsLink" class="block py-2.5 px-4 hover:bg-gray-700">Reports</a>
+            <a href="#" id="settingsLink" class="block py-2.5 px-4 hover:bg-gray-700">Settings</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-0 md:ml-64 p-6">
+        <header class="flex flex-col md:flex-row justify-between items-center border-b border-gray-300 pb-4 mb-6">
+            <h1 id="pageTitle" class="text-3xl font-semibold">Dashboard</h1>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4 md:mt-0" onclick="logOut()">
+                Log Out
+            </button>
+        </header>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="content-section">
+            <h2 class="text-2xl font-semibold mb-4">Welcome to the Admin Dashboard</h2>
+            <p>Select an option from the sidebar to view details.</p>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="ordersSection" class="content-section">
+            <h2 class="text-2xl font-semibold mb-4">Orders</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 text-left">Order ID</th>
+                            <th class="py-2 px-4 text-left">Customer</th>
+                            <th class="py-2 px-4 text-left">Amount</th>
+                            <th class="py-2 px-4 text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-50 divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-2 px-4">#001</td>
+                            <td class="py-2 px-4">John Doe</td>
+                            <td class="py-2 px-4">$150.00</td>
+                            <td class="py-2 px-4 text-green-600">Completed</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">#002</td>
+                            <td class="py-2 px-4">Jane Smith</td>
+                            <td class="py-2 px-4">$200.00</td>
+                            <td class="py-2 px-4 text-yellow-600">Pending</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">#003</td>
+                            <td class="py-2 px-4">Mike Johnson</td>
+                            <td class="py-2 px-4">$350.00</td>
+                            <td class="py-2 px-4 text-red-600">Cancelled</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div id="productsSection" class="content-section">
+            <h2 class="text-2xl font-semibold mb-4">Products</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 text-left">Product ID</th>
+                            <th class="py-2 px-4 text-left">Name</th>
+                            <th class="py-2 px-4 text-left">Price</th>
+                            <th class="py-2 px-4 text-left">Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-50 divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-2 px-4">P001</td>
+                            <td class="py-2 px-4">Laptop</td>
+                            <td class="py-2 px-4">$999.99</td>
+                            <td class="py-2 px-4">In Stock</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">P002</td>
+                            <td class="py-2 px-4">Smartphone</td>
+                            <td class="py-2 px-4">$699.99</td>
+                            <td class="py-2 px-4">In Stock</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">P003</td>
+                            <td class="py-2 px-4">Headphones</td>
+                            <td class="py-2 px-4">$199.99</td>
+                            <td class="py-2 px-4">Out of Stock</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Customers Section -->
+        <div id="customersSection" class="content-section">
+            <h2 class="text-2xl font-semibold mb-4">Customers</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 text-left">Customer ID</th>
+                            <th class="py-2 px-4 text-left">Name</th>
+                            <th class="py-2 px-4 text-left">Email</th>
+                            <th class="py-2 px-4 text-left">Orders</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-50 divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-2 px-4">C001</td>
+                            <td class="py-2 px-4">John Doe</td>
+                            <td class="py-2 px-4">john@example.com</td>
+                            <td class="py-2 px-4">5</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">C002</td>
+                            <td class="py-2 px-4">Jane Smith</td>
+                            <td class="py-2 px-4">jane@example.com</td>
+                            <td class="py-2 px-4">3</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">C003</td>
+                            <td class="py-2 px-4">Mike Johnson</td>
+                            <td class="py-2 px-4">mike@example.com</td>
+                            <td class="py-2 px-4">8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div id="reportsSection" class="content-section">
+            <h2 class="text-2xl font-semibold mb-4">Reports</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Sales Overview</h3>
+                <p class="mb-4">Here is a summary of the sales performance:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                        <h4 class="text-lg font-semibold mb-2">Total Sales</h4>
+                        <p class="text-2xl">$5,000.00</p>
+                    </div>
+                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                        <h4 class="text-lg font-semibold mb-2">Total Orders</h4>
+                        <p class="text-2xl">150</p>
+                    </div>
+                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                        <h4 class="text-lg font-semibold mb-2">Average Order Value</h4>
+                        <p class="text-2xl">$33.33</p>
+                    </div>
+                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                        <h4 class="text-lg font-semibold mb-2">Products Sold</h4>
+                        <p class="text-2xl">200</p>
+                    </div>
+                </div>
+                <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <h4 class="text-lg font-semibold mb-2">Sales Chart</h4>
+                    <canvas id="salesChart" class="h-64"></canvas> <!-- Canvas for Chart.js -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settingsSection" class="content-section">
+            <h2 class="text-2xl font-semibold mb-4">Settings</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">General Settings</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="siteName" class="block text-lg font-medium mb-1">Site Name</label>
+                        <input type="text" id="siteName" value="E-Commerce Site"
+                            class="block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                    <div>
+                        <label for="currency" class="block text-lg font-medium mb-1">Currency</label>
+                        <input type="text" id="currency" value="USD"
+                            class="block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                    <div>
+                        <label for="timezone" class="block text-lg font-medium mb-1">Timezone</label>
+                        <select id="timezone" class="block w-full p-2 border border-gray-300 rounded-md">
+                            <option value="UTC">UTC</option>
+                            <option value="America/New_York">America/New York</option>
+                            <option value="Europe/London">Europe/London</option>
+                            <option value="Asia/Tokyo">Asia/Tokyo</option>
+                        </select>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold mt-6 mb-2">User Management</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="adminEmail" class="block text-lg font-medium mb-1">Admin Email</label>
+                        <input type="email" id="adminEmail" value="admin@example.com"
+                            class="block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                    <div>
+                        <label for="adminPassword" class="block text-lg font-medium mb-1">Admin Password</label>
+                        <input type="password" id="adminPassword"
+                            class="block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold mt-6 mb-2">System Configuration</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="smtpServer" class="block text-lg font-medium mb-1">SMTP Server</label>
+                        <input type="text" id="smtpServer" value="smtp.example.com"
+                            class="block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                    <div>
+                        <label for="smtpPort" class="block text-lg font-medium mb-1">SMTP Port</label>
+                        <input type="text" id="smtpPort" value="587"
+                            class="block w-full p-2 border border-gray-300 rounded-md" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="javascript/admin.js"></script>
+</html>
