@@ -98,8 +98,12 @@ async function createProduct(event) {
     }
 }
 
-async function delete_product() {
-    let res =await axios.delete('admin/delete-product/1');
+async function delete_product(id) {
+    let confirmed = confirm("Are you confirm to delete it");
+    if (confirmed) {
+        let res =await axios.delete('admin/delete-product/'+id);   
+    }
+
 }
 
 async function getAllProduct() {
@@ -117,7 +121,7 @@ async function getAllProduct() {
         <td class="py-2 px-4">${product.description}</td>
         <td class="py-2 px-4">
         <button class="text-blue-500 hover:underline" >Edit</button>
-        <button class="text-red-500 hover:underline ml-4" onclick="delete_product()">Delete</button>
+        <button class="text-red-500 hover:underline ml-4" onclick="delete_product('${product._id}')">Delete</button>
         </td>
     `;
         const tableBody = document.querySelector('#product_body_section');
