@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js CDN -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> Add Chart.js CDN -->
     <style>
         /* Custom styles for the sidebar */
         .sidebar {
@@ -92,35 +92,23 @@
         <!-- Products Section -->
         <div id="productsSection" class="content-section">
             <h2 class="text-2xl font-semibold mb-4">Products</h2>
+            
             <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-end mb-4">
+                    <a href="#" id="addProductButton" class="text-white bg-blue-500 py-2 px-4 rounded-md">Add Product</a>
+                </div>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
-                            <th class="py-2 px-4 text-left">Product ID</th>
+                            <th class="py-2 px-4 text-left"></th>
                             <th class="py-2 px-4 text-left">Name</th>
                             <th class="py-2 px-4 text-left">Price</th>
                             <th class="py-2 px-4 text-left">Stock</th>
+                            <th class="py-2 px-4 text-left">description</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-gray-50 divide-y divide-gray-200">
-                        <tr>
-                            <td class="py-2 px-4">P001</td>
-                            <td class="py-2 px-4">Laptop</td>
-                            <td class="py-2 px-4">$999.99</td>
-                            <td class="py-2 px-4">In Stock</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 px-4">P002</td>
-                            <td class="py-2 px-4">Smartphone</td>
-                            <td class="py-2 px-4">$699.99</td>
-                            <td class="py-2 px-4">In Stock</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 px-4">P003</td>
-                            <td class="py-2 px-4">Headphones</td>
-                            <td class="py-2 px-4">$199.99</td>
-                            <td class="py-2 px-4">Out of Stock</td>
-                        </tr>
+                    <tbody class="bg-gray-50 divide-y divide-gray-200" id="product_body_section">
+                       
                     </tbody>
                 </table>
             </div>
@@ -249,6 +237,44 @@
             </div>
         </div>
     </div>
+<!-- Add Product Modal -->
+<div id="addProductModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-1/2">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-xl font-semibold">Add Product</h2>
+            <button id="closeModal" class="text-gray-600 hover:text-gray-900 text-lg font-bold">&times;</button>
+        </div>
+        <form id="addProductForm" class="p-4" onsubmit="createProduct(event)" method="post">
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700">Title</label>
+                <input type="text" id="title" name="title" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="imageUrl" class="block text-gray-700">Image URL</label>
+                <input type="file" id="img" name="imageUrl" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="price" class="block text-gray-700">Price</label>
+                <input type="number" id="price" name="price" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="stock" class="block text-gray-700">Stock</label>
+                <input type="number" id="stock" name="stock" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700">Description</label>
+                <textarea id="description" name="description" class="w-full px-3 py-2 border rounded"
+                    required></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button type="button" id="cancelButton"
+                    class="px-4 py-2 mr-2 bg-gray-500 text-white rounded">Cancel</button>
+                <button  class="px-4 py-2 bg-blue-500 text-white rounded" >Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
-    <script src="javascript/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascript/admin.js"></script>
 </html>
